@@ -1,0 +1,173 @@
+#:kivy 1.9.1
+
+<TestGUI>:
+    TabbedPanel:
+        id: tab_panel
+        size_hint: .7, 1
+        pos_hint: {'x':0, 'y':0.003}
+        do_default_tab: False
+        tab_height: -1
+        tab_width: -1
+        background_color: 1,0,0,0
+
+        TabbedPanelItem:
+            id: pos_tab
+            FloatLayout:
+
+                Graph:
+                    id: pos_graph
+                    xmax: 1000
+                    x_ticks_major: 10
+                    x_grid: True
+                    x_grid_label: True
+                    ylabel: "Presion [psi]"
+                    ymin: 0
+                    ymax:  100
+                    y_ticks_major: 10
+                    y_grid: True
+                    y_grid_label: True
+                    #border_color: [.14, .18, .2, 1]
+                    tick_color: [1,1,1,0.7]
+
+        TabbedPanelItem:
+            id: error_tab
+
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 5
+
+                Graph:
+                    id: graph_1
+                    xmax: 100
+                    x_ticks_major: 10
+                    x_grid: True
+                    x_grid_label: True
+                    ylabel: "Volumen"
+                    ymin: 0
+                    ymax:  500
+                    y_ticks_major: 50
+                    y_grid: True
+                    y_grid_label: True
+                    tick_color: [1,1,1,0.7]
+
+
+
+    FloatLayout:
+        size_hint: .3, .5
+        pos_hint: {'x':.7, 'y':.5}
+
+        Label:
+            size_hint: 1, .2
+            pos_hint: {'x':-0.2, 'y':.8}
+            text: "Ventilador UAQ:"
+            font_size: self.height/2
+            underline: True
+
+        Button:
+            size_hint: .25, .15
+            pos_hint: {'x': 0.37, 'y':0.32}
+            font_size: self.height/2.5
+            background_normal: ''
+            background_color: .18,.49,.6,1
+            on_press: root.toggle_tabs()
+            text: "Cambiar\n Graficas"
+
+        BoxLayout:
+            size_hint: 1, .15
+            pos_hint: {'x':0, 'y':.2}
+            orientation: 'horizontal'
+            spacing: 10
+            padding: 5, 0
+        Button:
+            background_color: (1.0, 0.0, 0.0, 0)
+            Image:
+                markup: False
+                source: 'itc.png'
+                x: 930
+                y: 580
+                allow_stretch: True
+                font_size: self.height/2.5
+
+        Button:
+            background_color: (1.0, 0.0, 0.0, 0)
+            Image:
+                markup: False
+                source: 'issste.png'
+                x: 1080
+                y: 580
+                allow_stretch: True
+                font_size: self.height/2.5
+
+        Button:
+            background_color: (1.0, 0.0, 0.0, 0)
+            Image:
+                markup: False
+                source: 'uakita.png'
+                x: 1230
+                y: 580
+                allow_stretch: True
+                font_size: self.height/2.5
+
+        Button:
+            id: coms_btn
+            size_hint: .45, .16
+            pos_hint: {'x':0.525, 'y':0.02}
+            text: "ENCENDER"
+            on_press: root.coms_btn_press()
+            background_normal: ''
+            background_color: 1,.73,0,1
+            font_size: self.height/2.5
+
+    # -------------------- Sliders --------------------
+    FloatLayout:
+        size_hint: .3, .5
+        pos_hint: {'x':.7, 'y':0}
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, .15
+            pos_hint: {'x':0, 'y':.85}
+
+            Label:
+                text: "Caudal"
+                font_size: self.height/1.5
+            Label:
+                text: "Ciclos"
+                font_size: self.height/1.5
+
+        BoxLayout:
+            size_hint: 1, .7
+            pos_hint: {'x':0, 'y':.15}
+            orientation: "horizontal"
+
+            Slider:
+                id: p_slider
+                orientation: 'vertical'
+                value_track: True
+                value_track_color: [0, 1, 1, 0.5]
+                min: 20
+                max: 100
+                value: 40
+                step: 1
+            Slider:
+                id: d_slider
+                orientation: 'vertical'
+                value_track: True
+                value_track_color: [0, 1, 1, 0.5]
+                min: 0
+                max: 10
+                value: 5
+                step: 1
+
+        BoxLayout:
+            size_hint: 1, .15
+            pos_hint: {'x':0, 'y':0}
+            orientation: "horizontal"
+
+            Label:
+                text: str(p_slider.value)
+                font_size: self.height/1.5
+            Label:
+                text: str(d_slider.value)
+                font_size: self.height/1.5
+
